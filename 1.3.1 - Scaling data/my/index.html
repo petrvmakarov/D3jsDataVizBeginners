@@ -8,17 +8,17 @@
         <div id='div1'></div>
 
         <script type="text/javascript">
-            var scheme = d3.schemeCategory20;
-            var data = [0, 1, 2, 3];
-            var scale = d3.scaleIdentity();
-                //.domain(data)
-                //.range(scheme);
+            var scheme = d3.schemeCategory20c;
+            var data = d3.range(0, scheme.length + 1, 1);
+            var scale = d3.scaleOrdinal()
+                .domain(d3.set(data))
+                .range(scheme);
 
             console.log(d3.schemeCategory10);
 
             d3.select('#div1').selectAll('div')
                 .data(data).enter()
-                .append('div') //.attr('style', function (d) { return 'color: ' + scale(d); })
+                .append('div').attr('style', function (d) { return 'color: ' + scale(d); })
                 .text(function (d) { 
                     return d + " " + scale(d);
                     });
